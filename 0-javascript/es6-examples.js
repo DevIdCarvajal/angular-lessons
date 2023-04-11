@@ -42,3 +42,20 @@ const sayHelloAndFirstLetterArrow = palabra => palabra.substr(0, 1)
 
 sayHelloAndFirstLetter("jamon")
 sayHelloAndFirstLetterArrow("jamon")
+
+// ------------ Ternary conditional ------------
+
+let myNewAge = 32
+
+// classic conditional version
+let iAmOld
+
+if(myNewAge > 99) {
+  iAmOld = true
+}
+else {
+  iAmOld = false
+}
+
+// ternary conditional version
+let iAmOldTernary = (myNewAge > 99) ? true : false

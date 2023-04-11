@@ -1,0 +1,13 @@
+.task {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.undone {
+  background-color: red;
+}
+
+.done {
+  background-color: green;
+}

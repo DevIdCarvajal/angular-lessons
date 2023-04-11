@@ -10,19 +10,16 @@ import { TASKS } from '../data/mock-tasks';
 
 export class TasksService {
 
-  tasks: Task[] = []
-
-  constructor() {
-    this.getTasks()
-        .subscribe(data => this.tasks = data);
-  }
+  constructor() { }
 
   getTasks(): Observable<Task[]> {
     const tasks = of(TASKS);
     return tasks;
   }
-
-  postTask(task: Task) {
-    this.tasks.push(task)
+  
+  getTaskById(id: number): Observable<Task> {
+    const filteredTasks = TASKS.filter(task => task.id === id) // [{ id: ... }]
+    const task = of(filteredTasks[0]);
+    return task;
   }
 }
