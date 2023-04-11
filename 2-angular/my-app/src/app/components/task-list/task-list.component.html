@@ -1,0 +1,10 @@
+<p *ngIf="tasks.length === 0">
+    No hay tareas
+</p>
+
+<ul *ngIf="tasks.length > 0">
+    <li *ngFor="let task of tasks">
+        {{ task.body }}
+        <a routerLink="/task/{{ task.id }}">Editar</a>
+    </li>
+</ul>

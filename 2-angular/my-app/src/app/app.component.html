@@ -1,39 +1,15 @@
-<h1>Ejemplos Angular</h1>
+<h1>Mi super app Angular 2 (aunque ya vayamos por la 16)</h1>
 
-<!-- ----------------------------------------- -->
+<nav>
+    <p>
+        <a routerLink="/">Ejemplos Varios</a>
+    </p>
+    <p>
+        <a routerLink="/hello">Ejemplo Hola Mundo</a>
+    </p>
+    <p>
+        <a routerLink="/tasks">Ejemplo Tareas</a>
+    </p>
+</nav>
 
-<h2>Ejemplo 1: Property & event binding</h2>
-
-<div>
-  <p>{{ message }}</p>
-  
-  <button (click)="showData()">Cargar datos</button>
-  
-  <div>{{ myData }}</div>
-</div>
-
-<hr>
-
-<!-- ----------------------------------------- -->
-
-<h2>Ejemplo 2: Llamar a otros componentes</h2>
-
-<div>
-  <h3>a) Sin pasar parámetros a los hijos</h3>
-
-  <app-hello-world></app-hello-world>
-
-  <hr>
-
-  <app-login></app-login>
-</div>
-
-<hr>
-
-<!-- ----------------------------------------- -->
-
-<h3>b) Pasando parámetros a los hijos</h3>
-
-<div>
-  <app-item [name]="childName"></app-item>
-</div>
+<router-outlet></router-outlet>
