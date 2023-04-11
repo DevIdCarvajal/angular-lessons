@@ -14,8 +14,10 @@ import { Task } from '../../interfaces/task';
 export class TaskComponent {
 
   task: Task = {
+    userId: 0,
     id: 0,
-    body: ""
+    title: "",
+    completed: false
   }
 
   constructor(
@@ -25,7 +27,7 @@ export class TaskComponent {
   ) { }
 
   ngOnInit() {
-    this.getTask()
+    this.getTask();
   }
 
   getTask() {

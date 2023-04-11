@@ -59,3 +59,15 @@ else {
 
 // ternary conditional version
 let iAmOldTernary = (myNewAge > 99) ? true : false
+
+// ------------ Template strings ------------
+
+const todayDay = "11"
+const todayMonth = "04"
+const todayYear = 2023
+
+// viejuner way
+const todayFullOld = todayDay + '/' + todayMonth + '/' + todayYear // 11/04/2023
+
+// hipster way
+const todayFullNew = `${todayDay}/${todayMonth}/${todayYear}` // 11/04/2023

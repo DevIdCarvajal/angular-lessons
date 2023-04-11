@@ -11,6 +11,7 @@ import { Task } from '../../interfaces/task'
 export class TaskListComponent {
 
   tasks: Task[] = []
+  taskText = ""
 
   // Injecting service
   constructor(private tasksService: TasksService) { }
@@ -19,5 +20,16 @@ export class TaskListComponent {
     this.tasksService
         .getTasks()
         .subscribe(data => this.tasks = data);
+  }
+
+  newTask() {
+    const newTask = JSON.stringify({
+      title: this.taskText,
+      userId: 99
+    })
+
+    this.tasksService
+        .postTask(newTask)
+        .subscribe(data => console.log("Datos enviados"));
   }
 }

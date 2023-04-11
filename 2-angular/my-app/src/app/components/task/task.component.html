@@ -1,7 +1,13 @@
-<h2>Tarea {{ task.id }}</h2>
+<div *ngIf="task.id === 0">
+  Cargando tarea...
+</div>
 
-<p>{{ task.body }}</p>
-
-<div [ngClass]="task.completed === true ? 'task done' : 'task undone'"></div>
+<div *ngIf="task.id > 0">
+  <h2>Tarea {{ task.id }}</h2>
+  
+  <p>{{ task.title }}</p>
+  
+  <div [ngClass]="task.completed === true ? 'task done' : 'task undone'"></div>
+</div>
 
 <button type="button" (click)="goBack()">Atrás</button>

@@ -2,9 +2,12 @@
     No hay tareas
 </p>
 
+<div>Texto: <input type="text" [(ngModel)]="taskText"></div>
+<button (click)="newTask()">Enviar tarea</button>
+
 <ul *ngIf="tasks.length > 0">
     <li *ngFor="let task of tasks">
-        {{ (task.body.length > 10) ? (task.body | slice:0:10) + '...' : (task.body) }}
+        {{ (task.title.length > 10) ? (task.title | slice:0:10) + '...' : (task.title) }}
         <a routerLink="/task/{{ task.id }}">Ver tarea completa</a>
     </li>
 </ul>
