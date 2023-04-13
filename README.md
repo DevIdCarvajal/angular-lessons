@@ -327,6 +327,103 @@ Y finalmente se usa en las plantillas de los componentes de la siguiente forma:
 
     <router-outlet></router-outlet>
 
+## Peticiones HTTP y datos
+
+Para comunicar la aplicación con el servidor mediante peticiones HTTP de cara a la obtención o envío de datos, Angular proporciona un módulo específico llamado HttpClientModule, que debe inyectarse en el fichero `app.module.ts`:
+
+    import { HttpClientModule } from '@angular/common/http';
+
+    @NgModule({
+      imports: [
+        HttpClientModule
+      ]
+    })
+
+Este módulo provee de las clases `HttpClient` y `HttpHeaders`, donde la primera tiene métodos que devuelven observables para lanzar las peticiones HTTP, y la segunda sirve para construir las cabeceras de la petición.
+
+Lo más habitual y recomendable es realizar las peticiones en los servicios, inyectando y utilizando las clases mencionadas:
+
+    import { Injectable } from '@angular/core';
+    import { Observable, of } from 'rxjs';
+    import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+    import { Task } from '../interfaces/task'
+
+    @Injectable({
+      providedIn: 'root'
+    })
+
+    export class TasksService {
+
+      urlData = 'https://jsonplaceholder.typicode.com/todos'
+      httpOptions = {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=UTF-8' })
+      };
+
+      constructor(private httpClient: HttpClient) { }
+
+      // Ejemplos GET
+      getTasks(): Observable<Task[]> {
+        return this.httpClient.get<Task[]>(this.urlData)
+      }
+      
+      getTaskById(id: number): Observable<Task> {
+        return this.httpClient.get<Task>(`${this.urlData}/${id}`)
+      }
+
+      // Ejemplo POST
+      postTask(task: any) {
+        return this.httpClient.post(this.urlData, task, this.httpOptions)
+      }
+    }
+
+Por último, el manejo de los datos debería hacerse en el componente que se suscribe al observable devuelto por el servicio:
+
+    import { Component } from '@angular/core';
+    import { TasksService } from '../../services/tasks.service'
+    import { Task } from '../../interfaces/task'
+
+    @Component({
+      selector: 'app-task-list',
+      templateUrl: './task-list.component.html',
+      styleUrls: ['./task-list.component.css']
+    })
+
+    export class TaskListComponent {
+
+      tasks: Task[] = []
+      taskText = ""
+
+      constructor(private tasksService: TasksService) { }
+      
+      // Ejemplo obtener datos al cargar el componente
+      ngOnInit(): void {
+        this.tasksService
+            .getTasks()
+            .subscribe(data => this.tasks = data);
+      }
+
+      // Ejemplo enviar datos de prueba
+      newTask() {
+        const newTask = JSON.stringify({
+          title: this.taskText,
+          userId: 99
+        })
+
+        this.tasksService
+            .postTask(newTask)
+            .subscribe(data => console.log("Datos enviados"));
+      }
+    }
+
+## Despliegue y puesta en producción
+
+Se puede crear una versión de producción con Angular CLI de esta manera:
+
+    ng build
+
+Este comando genera una carpeta `dist/` con los ficheros estáticos finales, que se pueden desplegar normalmente en cualquier servidor de hosting convencional (e.g., subiéndolos por FTP).
+
 ## Referencias generales
 
 [Documentación oficial TypeScript](https://www.typescriptlang.org/es/)  
@@ -341,8 +438,7 @@ Y finalmente se usa en las plantillas de los componentes de la siguiente forma:
 [Guía de estilo](https://github.com/johnpapa/angular-styleguide)  
 [Arquitectura en Angular](https://medium.com/notasdeangular/arquitectura-de-nuestras-aplicaciones-en-angular-84df61691b57)
 
-[Manejo de JSON (I)](https://nicolaslule.com/how-to-use-json-in-angular/)  
-[Manejo de JSON (II)](https://dev.to/rfornal/using-json-in-angular-19ca)  
+[Manejo de JSON](https://nicolaslule.com/how-to-use-json-in-angular/)    
 [API pública de datos](https://jsonplaceholder.typicode.com/)
 
 ## Ejercicios
