@@ -196,7 +196,7 @@ Angular permite indicar un fichero de plantilla que se renderiza dinámicamente 
 
 Los servicios son módulos que permiten compartir datos comunes o globales entre componentes, de manera que estos no interactúan directamente para pasarse información, sino que la consumen del o la suministran al servicio.
 
-Para ello, Angular implementa un subsistema interno de injección de dependencias, que permite importar para cada módulo aquellos otros módulos que requieran, independientemente de la arquitectura del proyecto.
+Para ello, Angular implementa un subsistema interno de inyección de dependencias, que permite importar para cada módulo aquellos otros módulos que requieran, independientemente de la arquitectura del proyecto.
 
 Ejemplo:
 
